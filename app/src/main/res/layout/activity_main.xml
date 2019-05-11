@@ -75,7 +75,7 @@
 
                                 android:layout_column="0"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+
                                 android:gravity="center"
                                 android:text="Purchase Name"
                                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_column="1"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+
                                 android:gravity="center"
                                 android:text="Name-Group"
                                 android:textStyle="bold" />
@@ -95,7 +95,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_column="2"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+
                                 android:gravity="center"
                                 android:text="+-Payment Amount"
                                 android:textStyle="bold" />

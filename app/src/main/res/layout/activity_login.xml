@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
 
     <EditText
         android:id="@+id/password"
@@ -77,6 +78,6 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pitch_logo" />
+        android:src="@drawable/pitch_logo" />
 
 </android.support.constraint.ConstraintLayout>
