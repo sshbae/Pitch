@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 /**
@@ -24,6 +23,15 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 Intent login_intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(login_intent);
+            }
+        });
+
+        Button register = findViewById(R.id.register_button2);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent register_intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(register_intent);
             }
         });
     }
