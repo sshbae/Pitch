@@ -115,6 +115,15 @@
                             android:layout_height="20dp" />
                     </TableLayout>
 
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/table"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="185dp"
+                        android:text="sign out" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
