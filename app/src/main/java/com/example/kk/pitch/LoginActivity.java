@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by KK on 5/10/2019.
+ * Carter Moody
  */
 
 public class LoginActivity extends Activity {
