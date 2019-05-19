@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 
+import com.example.kk.pitch.R;
+
 import com.example.kk.pitch.View.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -19,7 +21,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_profile);
 
         TabHost tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
@@ -36,7 +38,7 @@ public class MainActivity extends Activity {
         spec.setIndicator("GROUPS");
         tabHost.addTab(spec);
 
-        sign_out = findViewById(R.id.button);
+        sign_out = findViewById(R.id.sign_out_button);
         sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
