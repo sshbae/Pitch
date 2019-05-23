@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.kk.pitch.Controller.RegisterController;
+import com.example.kk.pitch.Controller.UserController;
+import com.example.kk.pitch.Model.UserModel;
 import com.example.kk.pitch.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,11 +30,14 @@ public class RegisterActivity extends Activity {
     private String email;
     private String password;
     private String confirm;
+    private String name;
     private Intent login_intent;
     private EditText email_et;
     private EditText password_et;
     private EditText confirm_et;
+    private EditText name_et;
     private RegisterController controller;
+    private UserController userController;
     private Button registerButton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class RegisterActivity extends Activity {
 
         mAuth = FirebaseAuth.getInstance();
         controller = new RegisterController(this);
+        userController = new UserController(this);
         login_intent = new Intent(RegisterActivity.this, LoginActivity.class);
         registerButton = findViewById(R.id.register_button2);
 
@@ -53,13 +59,17 @@ public class RegisterActivity extends Activity {
                 password = password_et.getText().toString();
                 confirm_et = findViewById(R.id.confirm);
                 confirm = confirm_et.getText().toString();
+                name_et = findViewById(R.id.name);
+                name = name_et.getText().toString();
 
-                controller.register(registerButton, email, password, confirm, mAuth);
+                controller.register(email, password, confirm, mAuth);
+
             }
         });
     }
 
     public void startIntent(){
+        userController.addInfo(email, name);
         startActivity(login_intent);
     }
 
@@ -79,6 +89,10 @@ public class RegisterActivity extends Activity {
         }
         if(s.equals("confirm")) {
             Toast.makeText(RegisterActivity.this, "Invalid password confirmation.",
+                    Toast.LENGTH_SHORT).show();
+        }
+        if(s.equals("name")) {
+            Toast.makeText(RegisterActivity.this, "Invalid name.",
                     Toast.LENGTH_SHORT).show();
         }
         if(s.equals("match")){

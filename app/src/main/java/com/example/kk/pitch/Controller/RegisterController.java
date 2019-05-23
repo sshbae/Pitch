@@ -1,10 +1,12 @@
 package com.example.kk.pitch.Controller;
 
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.kk.pitch.Model.RegisterModel;
+import com.example.kk.pitch.Model.UserModel;
 import com.example.kk.pitch.View.RegisterActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,12 +19,14 @@ public class RegisterController {
     private RegisterActivity context;
     private RegisterModel model;
 
+
     public RegisterController(RegisterActivity context){
         this.context = context;
         model = new RegisterModel(this);
+
     }
 
-    public void register(Button registerButton, final String email, final String password, final String confirm, final FirebaseAuth mAuth){
+    public void register(final String email, final String password, final String confirm, final FirebaseAuth mAuth){
         if(email == null || email.equals("")){
             context.inputError("email");
         }
@@ -36,7 +40,9 @@ public class RegisterController {
             context.inputError("match");
         }
         else {
+
             model.createAccount(mAuth, email, password);
+
         }
     }
 
