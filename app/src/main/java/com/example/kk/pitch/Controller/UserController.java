@@ -47,4 +47,16 @@ public class UserController {
 
     }
 
+    public void createGroup(){};
+
+    public void addPicture(){};
+
+    public void addMember(){};
+
+    public void addDescription(){};
+
+    public void createPaymentRequest(){};
+
+
+
 }
