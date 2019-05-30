@@ -3,13 +3,12 @@ package com.example.kk.pitch.View;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.kk.pitch.Controller.LoginController;
+import com.example.kk.pitch.Model.LoginModel;
 import com.example.kk.pitch.Model.UserModel;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,11 +21,11 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends Activity {
     private FirebaseAuth mAuth;
     private Intent login_intent;
-    private LoginController controller;
     private EditText email_et;
     private EditText password_et;
     private String email;
     private String password;
+    private LoginModel model;
     private UserModel userModel;
 
     public final static String USERMODEL = "usermodel";
@@ -37,7 +36,7 @@ public class LoginActivity extends Activity {
 
 
         mAuth = FirebaseAuth.getInstance();                                                         //Initialize the user
-        controller = new LoginController(this);
+        model = new LoginModel(this);
         login_intent = new Intent(LoginActivity.this, MainActivity.class);            //Initialize intent for MainActivity
         Button login = findViewById(R.id.login_button);                                             //Initialize Login Button
         Button register = findViewById(R.id.register_button2);                                      //Initialize the Register Button
@@ -50,7 +49,7 @@ public class LoginActivity extends Activity {
                 password_et = findViewById(R.id.password);
                 password = password_et.getText().toString();
 
-                controller.signIn(mAuth, email, password);
+                signIn(mAuth, email, password);
             }
         });
 
@@ -65,12 +64,33 @@ public class LoginActivity extends Activity {
 
     }
 
+    public void signIn(FirebaseAuth mAuth, String email, String password){
+        if(email == null || email.equals("")){
+            inputError("email");
+        }
+        else if(password == null || password.equals("")){
+            inputError("password");
+        }
+        else{
+            model.signIn(mAuth, email, password);
+        }
+    }
+
     public void onStart(){
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             startActivity(login_intent);
+        }
+    }
+
+    public void response(int i){
+        if(i == 1) {
+            onStart();
+        }
+        else if(i == 0){
+            signInError();
         }
     }
 
