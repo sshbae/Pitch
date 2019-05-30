@@ -1,7 +1,6 @@
 package com.example.kk.pitch.View;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.kk.pitch.Controller.LoginController;
-import com.example.kk.pitch.MainActivity;
+import com.example.kk.pitch.Model.UserModel;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,13 +27,14 @@ public class LoginActivity extends Activity {
     private EditText password_et;
     private String email;
     private String password;
+    private UserModel userModel;
 
-
+    public final static String USERMODEL = "usermodel";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
 
         mAuth = FirebaseAuth.getInstance();                                                         //Initialize the user
         controller = new LoginController(this);
@@ -57,7 +57,8 @@ public class LoginActivity extends Activity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent register_intent = new Intent(LoginActivity.this, RegisterActivity.class);               //Initialize intent for RegisterActivity
+                Intent register_intent = new Intent(LoginActivity.this,               //Initialize intent for RegisterActivity
+                        RegisterActivity.class);
                 startActivity(register_intent);
             }
         });
@@ -88,9 +89,4 @@ public class LoginActivity extends Activity {
                     Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
-
 }
