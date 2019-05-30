@@ -66,7 +66,7 @@ public class UserModel implements Parcelable {
     public void addNameToDB(String name){
         // Write a message to the database
         Log.e("NAME", "is added to DB");
-        myRef.child("users").setValue(userID);
+        myRef.child("users").push().setValue(userID);
         myRef.child("users").child(userID).setValue("name");
         myRef.child("users").child(userID).child("name").setValue(name);
     }
