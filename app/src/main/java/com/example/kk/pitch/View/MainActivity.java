@@ -37,18 +37,23 @@ public class MainActivity extends Activity {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_profile);
 
+        final String[] name = new String[1];
         uInfo = new UserInfo();
+
         myRef.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 uInfo = userController.showData(snapshot);
-                Log.e("I", "am here");
+                name[0] = uInfo.getName();
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e("ERROR", "ERROR");
             }
         });
+        //Log.e("name", name[0]);
+
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -56,9 +61,6 @@ public class MainActivity extends Activity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 uInfo = userController.showData(dataSnapshot);
-                if(uInfo.getName() != null){
-                    Log.e("I", "am here");
-                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -85,10 +87,8 @@ public class MainActivity extends Activity {
         tabHost.addTab(spec);
 
         name_tv = findViewById(R.id.userName);
-        name_tv.setText(uInfo.getName());
-        if(uInfo.getName() == null){
-            Log.e("name", "is null");
-        }
+        name_tv.setText(name[0]);
+
 
         sign_out = findViewById(R.id.sign_out_button);
         sign_out.setOnClickListener(new View.OnClickListener() {

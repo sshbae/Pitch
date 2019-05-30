@@ -28,7 +28,7 @@ public class UserController {
 
         for(DataSnapshot ds : dataSnapshot.getChildren()) {
             uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-            uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+            //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
         }
 
         return uInfo;
@@ -36,6 +36,7 @@ public class UserController {
 
     }
     public void addInfo(String email, String name){
+        Log.e("I", "entered addinfo");
         if(email == null || email.equals("")){
             ((RegisterActivity)context).inputError("email");
         }else if(name == null || name.equals("")){
