@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.kk.pitch.View.LoginActivity;
+import com.example.kk.pitch.Controller.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

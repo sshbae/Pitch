@@ -1,4 +1,4 @@
-package com.example.kk.pitch.View;
+package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.kk.pitch.Controller.UserController;
 import com.example.kk.pitch.Model.RegisterModel;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;

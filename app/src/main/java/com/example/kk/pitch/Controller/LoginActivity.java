@@ -1,4 +1,4 @@
-package com.example.kk.pitch.View;
+package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
