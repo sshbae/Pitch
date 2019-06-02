@@ -1,5 +1,6 @@
 package com.example.kk.pitch.Model;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.kk.pitch.R;
+
 
 public class GroupPageSettingsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -79,15 +81,23 @@ public class GroupPageSettingsActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getFragmentManager();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
+        if (id == R.id.nav_LayoutFragment) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                        , new LayoutFragment())
+                    .commit();
+        } else if (id == R.id.nav_LayoutFragment2) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                            , new LayoutFragment2())
+                    .commit();
+        } else if (id == R.id.nav_LayoutFragment3) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame
+                            , new LayoutFragment3())
+                    .commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
