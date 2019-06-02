@@ -17,8 +17,8 @@ public class UserController {
         this.context = context;
     }
 
-    public UserInfo showData(DataSnapshot dataSnapshot){
-        UserInfo uInfo = new UserInfo();
+    public void showData(DataSnapshot dataSnapshot, UserInfo uInfo){
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         String userID = user.getUid();
@@ -27,9 +27,6 @@ public class UserController {
             uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
             //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
         }
-
-        return uInfo;
-
 
     }
     public void addInfo(String email, String name){
