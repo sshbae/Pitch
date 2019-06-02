@@ -3,15 +3,12 @@ package com.example.kk.pitch.Model;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.kk.pitch.Controller.LoginController;
-import com.example.kk.pitch.View.LoginActivity;
+import com.example.kk.pitch.Controller.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by KK on 5/18/2019.
@@ -19,9 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginModel extends Activity{
 
-    private LoginController context;
+    private LoginActivity context;
 
-    public LoginModel(LoginController context){
+    public LoginModel(LoginActivity context){
         this.context = context;
     }
 
@@ -33,11 +30,11 @@ public class LoginModel extends Activity{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("sign in:", "signInWithEmail:success");
-                            context.response(1);
+                            context.onStart();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("sign in", "signInWithEmail:failure", task.getException());
-                            context.response(0);
+                            context.signInError();
                         }
 
                         // ...

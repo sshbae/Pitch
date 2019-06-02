@@ -1,4 +1,4 @@
-package com.example.kk.pitch.View;
+package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,9 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.example.kk.pitch.Controller.UserController;
 import com.example.kk.pitch.Model.UserInfo;
-import com.example.kk.pitch.Model.UserModel;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
