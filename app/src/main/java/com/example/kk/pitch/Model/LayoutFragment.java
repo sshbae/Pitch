@@ -1,4 +1,4 @@
-package com.example.kk.pitch.View;
+package com.example.kk.pitch.Model;
 
 import android.app.Fragment;
 import android.os.Bundle;

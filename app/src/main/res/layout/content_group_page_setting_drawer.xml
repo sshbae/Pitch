@@ -5,14 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Model.GroupPageSettingsActivity"
-    tools:showIn="@layout/app_bar_group_page_settings">
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+    tools:context=".Controller.GroupPageSettingDrawerActivity"
+    tools:showIn="@layout/app_bar_group_page_setting_drawer">
 
 </android.support.constraint.ConstraintLayout>
-

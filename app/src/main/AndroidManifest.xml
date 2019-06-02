@@ -1,36 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kk.pitch">
+<<<<<<< Original<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.example.kk.pitch">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-<<<<<<< HEAD
-        <activity android:name=".Controller.LoginActivity">
-=======
-        <activity
-            android:name=".View.GroupPageSettingsActivity"
-            android:label="@string/title_activity_group_page_settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".View.LoginActivity">
->>>>>>> started settings drawer
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-<<<<<<< HEAD
-        <activity android:name=".Controller.MainActivity"/>
-        <activity android:name=".Controller.RegisterActivity"/>
-=======
-        <activity android:name=".View.MainActivity" />
-        <activity android:name=".View.RegisterActivity" />
->>>>>>> started settings drawer
-    </application>
+    <activity android:name=".Controller.LoginActivity">
+    =======
+    <activity
+        android:name=".Model.GroupPageSettingsActivity"
+        android:label="@string/title_activity_group_page_settings"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
+    <activity android:name=".View.LoginActivity">
+        >>>>>>> started settings drawer
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-</manifest>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
+
+    <activity android:name=".Controller.MainActivity" />
+    <activity android:name=".Controller.RegisterActivity" />
+    =======
+    <activity android:name=".View.MainActivity" />
+    <activity android:name=".View.RegisterActivity" />
+    >>>>>>> started settings drawer
+</application>
+
+</manifest>=======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity
+        android:name="com.example.kk.pitch.Controller.GroupPageSettingDrawerActivity"
+        android:label="@string/title_activity_group_page_setting_drawer"
+        android:theme="@style/AppTheme.NoActionBar"></activity>
+</application>
+</manifest>>>>>>>> Added
