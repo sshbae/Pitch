@@ -1,24 +1,16 @@
-package com.example.kk.pitch.View;
+package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.kk.pitch.Controller.RegisterController;
-import com.example.kk.pitch.Controller.UserController;
-import com.example.kk.pitch.Model.UserModel;
+import com.example.kk.pitch.Model.RegisterModel;
 import com.example.kk.pitch.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by KK on 5/12/2019.
@@ -36,8 +28,8 @@ public class RegisterActivity extends Activity {
     private EditText password_et;
     private EditText confirm_et;
     private EditText name_et;
-    private RegisterController controller;
     private UserController userController;
+    private RegisterModel model;
     private Button registerButton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +37,8 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        controller = new RegisterController(this);
         userController = new UserController(this);
+        model = new RegisterModel(this);
         login_intent = new Intent(RegisterActivity.this, LoginActivity.class);
         registerButton = findViewById(R.id.register_button2);
 
@@ -62,10 +54,28 @@ public class RegisterActivity extends Activity {
                 name_et = findViewById(R.id.name);
                 name = name_et.getText().toString();
 
-                controller.register(email, password, confirm, mAuth);
+                register(email, password, confirm, mAuth);
 
             }
         });
+    }
+
+    public void register(final String email, final String password, final String confirm, final FirebaseAuth mAuth){
+        if(email == null || email.equals("")){
+            inputError("email");
+        }
+        else if(password == null || password.equals("")){
+            inputError("password");
+        }
+        else if(confirm == null || confirm.equals("")){
+            inputError("confirm");
+        }
+        else if(!password.equals(confirm)){
+            inputError("match");
+        }
+        else {
+            model.createAccount(mAuth, email, password);
+        }
     }
 
     public void startIntent(){
