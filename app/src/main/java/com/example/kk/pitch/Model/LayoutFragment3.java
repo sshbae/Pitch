@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 
 import com.example.kk.pitch.R;
 
-public class LayoutFragment extends Fragment {
+public class LayoutFragment3 extends Fragment {
 
     View myView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.group_page_settings_layout, container, false);
+        myView = inflater.inflate(R.layout.group_page_settings_layout3, container, false);
         return myView;
     }
 }

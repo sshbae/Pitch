@@ -15,7 +15,7 @@
         android:layout_marginTop="80dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="GorupSettingsLayout3"
+        android:text="GroupSettingsLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_conversion_wrapHeight="118"
