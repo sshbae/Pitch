@@ -37,7 +37,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_profile);
 
         uInfo = new UserInfo();
@@ -102,6 +101,15 @@ public class MainActivity extends Activity {
         spec.setIndicator("GROUPS");
         tabHost.addTab(spec);
 
+        Button createGroup = new Button;
+        createGroup = findViewById(R.id.create_group_button);
+        createGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createGroupIntent = new Intent(MainActivity.this, NewGroupActivity.class);
+                startActivity(createGroupIntent);
+            }
+        });
 
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
