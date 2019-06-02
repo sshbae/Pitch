@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <<<<<<< HEAD
-        <activity android:name=".Controller.LoginActivity">
-=======
         <activity
             android:name=".View.GroupPageSettingsActivity"
             android:label="@string/title_activity_group_page_settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".View.LoginActivity">
->>>>>>> started settings drawer
+=======
+        <activity android:name=".Controller.LoginActivity">
+>>>>>>> master
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +25,12 @@
             </intent-filter>
         </activity>
 <<<<<<< HEAD
-        <activity android:name=".Controller.MainActivity"/>
-        <activity android:name=".Controller.RegisterActivity"/>
-=======
         <activity android:name=".View.MainActivity" />
         <activity android:name=".View.RegisterActivity" />
->>>>>>> started settings drawer
+=======
+        <activity android:name=".Controller.MainActivity"/>
+        <activity android:name=".Controller.RegisterActivity"/>
+>>>>>>> master
     </application>
 
 </manifest>
