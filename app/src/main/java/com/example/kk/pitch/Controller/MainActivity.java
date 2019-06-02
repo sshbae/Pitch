@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.kk.pitch.Model.UserInfo;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,14 +40,20 @@ public class MainActivity extends Activity {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main_profile);
 
-        final String[] name = new String[1];
         uInfo = new UserInfo();
 
-        myRef.addListenerForSingleValueEvent( new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent( new ValueEventListener() {                            //gets user info from database
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                uInfo = userController.showData(snapshot);
-                name[0] = uInfo.getName();
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String userID = user.getUid();
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
+                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                    name_tv = findViewById(R.id.userName);
+                    name_tv.setText(uInfo.getName());
+                }
 
             }
             @Override
@@ -54,15 +61,22 @@ public class MainActivity extends Activity {
                 Log.e("ERROR", "ERROR");
             }
         });
-        //Log.e("name", name[0]);
 
 
-        ValueEventListener postListener = new ValueEventListener() {
+        ValueEventListener postListener = new ValueEventListener() {                                //refreshes user info upon change
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                uInfo = userController.showData(dataSnapshot);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String userID = user.getUid();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
+                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                    name_tv = findViewById(R.id.userName);
+                    name_tv.setText(uInfo.getName());
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -88,20 +102,19 @@ public class MainActivity extends Activity {
         spec.setIndicator("GROUPS");
         tabHost.addTab(spec);
 
-        name_tv = findViewById(R.id.userName);
-        name_tv.setText(name[0]);
+
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //drawer.addDrawerListener(menuListener);
 
-        menu = findViewById(R.id.hamburgerMenu);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        //menu = findViewById(R.id.hamburgerMenu);
+        //menu.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
                 /*pull out the menu*/
-                drawer.openDrawer(view);
-            }
-        });
+                //drawer.openDrawer(view);
+            //}
+        //});
 
 
         sign_out = findViewById(R.id.sign_out_button);
