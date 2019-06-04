@@ -19,4 +19,8 @@
     <string name="menu_send">Send</string>
     <string name="title_activity_group_page_setting_drawer">GroupPageSettingDrawerActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_settings">activity_settings</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
