@@ -30,8 +30,10 @@ public class RegisterActivity extends Activity {
     private EditText name_et;
     private UserController userController;
     private RegisterModel model;
+    private Button continueButton;
     private Button registerButton;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -40,24 +42,40 @@ public class RegisterActivity extends Activity {
         userController = new UserController(this);
         model = new RegisterModel(this);
         login_intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        registerButton = findViewById(R.id.register_button2);
+        continueButton = findViewById(R.id.Continue_Register);
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email_et = findViewById(R.id.email);
+                email_et = findViewById(R.id.Username);
                 email = email_et.getText().toString();
                 password_et = findViewById(R.id.password);
                 password = password_et.getText().toString();
                 confirm_et = findViewById(R.id.confirm);
                 confirm = confirm_et.getText().toString();
-                name_et = findViewById(R.id.name);
-                name = name_et.getText().toString();
 
-                register(email, password, confirm, mAuth);
+                continueRegister();
 
             }
         });
+    }
+
+    protected void continueRegister(){
+        setContentView(R.layout.activity_register_2);
+
+        registerButton = findViewById(R.id.Register);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name_et = findViewById(R.id.name);
+                name = name_et.getText().toString();
+                register(email, password, confirm, mAuth);
+            }
+        });
+
+
+
     }
 
     public void register(final String email, final String password, final String confirm, final FirebaseAuth mAuth){
