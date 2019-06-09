@@ -39,12 +39,12 @@ public class LoginActivity extends Activity {
         model = new LoginModel(this);
         login_intent = new Intent(LoginActivity.this, MainActivity.class);            //Initialize intent for MainActivity
         Button login = findViewById(R.id.login_button);                                             //Initialize Login Button
-        Button register = findViewById(R.id.register_button2);                                      //Initialize the Register Button
+        Button register = findViewById(R.id.Continue_Register);                                      //Initialize the Register Button
 
         login.setOnClickListener(new View.OnClickListener() {                                       //Response to click on Login Button
             @Override
             public void onClick(View view) {
-                email_et = findViewById(R.id.email);
+                email_et = findViewById(R.id.Username);
                 email = email_et.getText().toString();
                 password_et = findViewById(R.id.password);
                 password = password_et.getText().toString();
