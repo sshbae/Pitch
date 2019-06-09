@@ -85,15 +85,6 @@ public class LoginActivity extends Activity {
         }
     }
 
-    public void response(int i){
-        if(i == 1) {
-            onStart();
-        }
-        else if(i == 0){
-            signInError();
-        }
-    }
-
     public void signInError(){
         Toast.makeText(LoginActivity.this, "Authentication failed.",
             Toast.LENGTH_SHORT).show();

@@ -15,13 +15,12 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/confirm"
-        app:layout_constraintEnd_toEndOf="@+id/Username"
-        app:layout_constraintStart_toStartOf="@+id/Username"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/Username"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="50dp"
@@ -34,31 +33,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email"
-        app:layout_constraintBottom_toTopOf="@+id/Username"
-        app:layout_constraintStart_toStartOf="@+id/Username" />
+        android:text="Email"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email" />
 
     <TextView
         android:id="@+id/password_text"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="@string/password"
+        android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintStart_toStartOf="@+id/password" />
 
     <Button
-        android:id="@+id/Continue_Register"
+        android:id="@+id/register_button2"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginBottom="24dp"
-        android:text="Continue"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -69,19 +67,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/pitch_logo"
-        app:layout_constraintBottom_toTopOf="@+id/Username"
-        app:layout_constraintEnd_toEndOf="@+id/Username"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Username"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:contentDescription="TODO" />
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/confirm_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/confirm_password"
+        android:text="Confirm Password"
         app:layout_constraintBottom_toTopOf="@+id/confirm"
         app:layout_constraintStart_toStartOf="@+id/confirm" />
 
@@ -92,11 +87,9 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/Continue_Register"
+        app:layout_constraintBottom_toTopOf="@+id/register_button2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:importantForAutofill="no" />
-
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 
