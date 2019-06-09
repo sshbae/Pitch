@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
     private TextView name_tv;
     private UserInfo uInfo;
     private FirebaseDatabase  database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference("users");
+    private DatabaseReference myRef = database.getReference();
     private UserController userController = new UserController(this);
     private ArrayList<GroupObject> groupObjects = new ArrayList<>();
 
@@ -75,13 +75,12 @@ public class MainActivity extends Activity {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
+
                 DataSnapshot ds = snapshot.child("users");
-
-                uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-                uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
-                name_tv = findViewById(R.id.userName);
-                name_tv.setText(uInfo.getName());
-
+                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
+                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                    name_tv = findViewById(R.id.userName);
+                    name_tv.setText(uInfo.getName());
 
             }
             @Override
@@ -99,12 +98,13 @@ public class MainActivity extends Activity {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
-                    name_tv = findViewById(R.id.userName);
-                    name_tv.setText(uInfo.getName());
-                }
+
+                DataSnapshot ds = dataSnapshot.child("users");
+                uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
+                //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                name_tv = findViewById(R.id.userName);
+                name_tv.setText(uInfo.getName());
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
