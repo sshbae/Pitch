@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.kk.pitch.Model.GroupObject;
 import com.example.kk.pitch.Model.UserInfo;
 import com.example.kk.pitch.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends Activity {
 
     private Button sign_out;
@@ -31,15 +36,38 @@ public class MainActivity extends Activity {
     private TextView name_tv;
     private UserInfo uInfo;
     private FirebaseDatabase  database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference();
+    private DatabaseReference myRef = database.getReference("users");
     private UserController userController = new UserController(this);
+    private ArrayList<GroupObject> groupObjects = new ArrayList<>();
+
+    public final static String GROUPOBJECTS = "groupobjects";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            groupObjects = extras.getParcelableArrayList("name");
+            // and get whatever type user account id is
+        }else{
+            groupObjects = new ArrayList<GroupObject>();
+            if(groupObjects == null){
+                Log.e("i", "am null2");
+            }
+        }
+        for(int i = 0; i < groupObjects.size(); i++) {
+            LinearLayout groupLayout = findViewById(R.id.group_linear_layout);
+            View child = getLayoutInflater().inflate(R.layout.activity_group_display, null);
+            TextView gName = child.findViewById(R.id.group_name_display);
+            gName.setText(groupObjects.get(i).getName());
+            groupLayout.addView(child);
+        }
+
+
         uInfo = new UserInfo();
+
 
         myRef.addListenerForSingleValueEvent( new ValueEventListener() {                            //gets user info from database
             @Override
@@ -47,12 +75,13 @@ public class MainActivity extends Activity {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                for(DataSnapshot ds : snapshot.getChildren()) {
-                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
-                    name_tv = findViewById(R.id.userName);
-                    name_tv.setText(uInfo.getName());
-                }
+                DataSnapshot ds = snapshot.child("users");
+
+                uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
+                uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                name_tv = findViewById(R.id.userName);
+                name_tv.setText(uInfo.getName());
+
 
             }
             @Override
@@ -101,12 +130,13 @@ public class MainActivity extends Activity {
         spec.setIndicator("GROUPS");
         tabHost.addTab(spec);
 
-        Button createGroup = new Button;
-        createGroup = findViewById(R.id.create_group_button);
+
+        FloatingActionButton createGroup = findViewById(R.id.create_group_button);
         createGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent createGroupIntent = new Intent(MainActivity.this, NewGroupActivity.class);
+                createGroupIntent.putExtra(GROUPOBJECTS, groupObjects);
                 startActivity(createGroupIntent);
             }
         });
