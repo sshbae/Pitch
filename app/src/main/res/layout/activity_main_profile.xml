@@ -14,15 +14,6 @@
         android:visibility="gone"
         tools:layout_editor_absoluteY="445dp">
 
-        <Button
-            android:id="@+id/sign_out_button"
-            android:layout_width="211dp"
-            android:layout_height="wrap_content"
-            android:text="sign out"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="217dp"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="0dp" />
     </android.support.v4.widget.DrawerLayout>
 
     <TabHost
@@ -109,8 +100,6 @@
 
                 </android.support.constraint.ConstraintLayout>
 
-=======
->>>>>>> master
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/Profile"
                     android:layout_width="match_parent"
@@ -142,7 +131,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="24dp"
-                            android:text="TextView"
+                            android:textColor="#03A9F4"
+                            android:text="Name"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +203,18 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tableRow" />
+                        app:layout_constraintTop_toBottomOf="@+id/tableRow" >
+
+                        <Button
+                            android:id="@+id/sign_out_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="sign out"
+                            tools:layout_conversion_absoluteHeight="48dp"
+                            tools:layout_conversion_absoluteWidth="217dp"
+                            tools:layout_editor_absoluteX="181dp"
+                            tools:layout_editor_absoluteY="0dp" />
+                    </ScrollView>
 
                     <android.support.constraint.Guideline
                         android:id="@+id/horizontal"

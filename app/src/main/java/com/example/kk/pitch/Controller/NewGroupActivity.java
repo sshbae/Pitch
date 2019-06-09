@@ -30,10 +30,7 @@ public class NewGroupActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Log.e("i", "already exists");
-            groupObjects = extras.getParcelableArrayList("name");
-            if(groupObjects == null){
-                Log.e("i", "am null2");
-            }
+            groupObjects = extras.getParcelableArrayList(MainActivity.GROUPOBJECTS);
             // and get whatever type user account id is
         }else{
             Log.e("i", "create new");
@@ -41,7 +38,7 @@ public class NewGroupActivity extends Activity {
         }
 
         groupNameET = findViewById(R.id.group_name_et);
-        groupName = groupNameET.toString();
+
 
 
 
@@ -49,14 +46,10 @@ public class NewGroupActivity extends Activity {
         confirmGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                groupName = groupNameET.getText().toString();
                 groupObject = new GroupObject((groupName));
-                if(groupObject == null){
-                    Log.e("i", "am null");
-                }
-                if(groupObjects == null){
-                    Log.e("i", "am null2");
-                }
                 groupObjects.add(groupObject);
+
                 Intent confirm_group_intent = new Intent(NewGroupActivity.this, MainActivity.class);
                 confirm_group_intent.putExtra(MainActivity.GROUPOBJECTS, groupObjects);
                 startActivity(confirm_group_intent);

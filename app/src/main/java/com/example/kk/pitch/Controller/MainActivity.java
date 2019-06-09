@@ -34,7 +34,6 @@ public class MainActivity extends Activity {
     DrawerLayout.DrawerListener menuListener;
     private Intent login_intent;
     private TextView name_tv;
-    private UserInfo uInfo;
     private FirebaseDatabase  database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     private UserController userController = new UserController(this);
@@ -49,13 +48,11 @@ public class MainActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            groupObjects = extras.getParcelableArrayList("name");
-            // and get whatever type user account id is
+            groupObjects = extras.getParcelableArrayList(GROUPOBJECTS);
+            Log.e("i", "am NOT null");
+            Log.e("name", groupObjects.get(0).getName());
         }else{
-            groupObjects = new ArrayList<GroupObject>();
-            if(groupObjects == null){
-                Log.e("i", "am null2");
-            }
+            groupObjects = new ArrayList<>();
         }
         for(int i = 0; i < groupObjects.size(); i++) {
             LinearLayout groupLayout = findViewById(R.id.group_linear_layout);
@@ -65,23 +62,18 @@ public class MainActivity extends Activity {
             groupLayout.addView(child);
         }
 
-
-        uInfo = new UserInfo();
-
-
         myRef.addListenerForSingleValueEvent( new ValueEventListener() {                            //gets user info from database
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-
-                DataSnapshot ds = snapshot.child("users");
-                    uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-                    //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
-                    name_tv = findViewById(R.id.userName);
-                    name_tv.setText(uInfo.getName());
-
+                DataSnapshot ds_user = snapshot.child("users");
+                DataSnapshot ds_user_id = snapshot.child("user_id");
+                UserInfo.getInstance().setUsername(ds_user_id.child(userID).getValue().toString());
+                UserInfo.getInstance().setName(ds_user.child(UserInfo.getInstance().getUsername()).getValue(UserInfo.class).getName());                     //set name
+                name_tv = findViewById(R.id.userName);
+                name_tv.setText(UserInfo.getInstance().getName());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -89,8 +81,8 @@ public class MainActivity extends Activity {
             }
         });
 
-
-        ValueEventListener postListener = new ValueEventListener() {                                //refreshes user info upon change
+        /*ValueEventListener postListener = new ValueEventListener() {
+            //refreshes user info upon change
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -99,21 +91,23 @@ public class MainActivity extends Activity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
 
-                DataSnapshot ds = dataSnapshot.child("users");
-                uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-                //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
+                DataSnapshot ds_user = dataSnapshot.child("users");
+                DataSnapshot ds_user_id = dataSnapshot.child("user_id");
+                UserInfo.getInstance().setUsername(ds_user_id.child(userID).getValue().toString());
+                UserInfo.getInstance().setName(ds_user.child("username").getValue(UserInfo.class).getName());                     //set name
+                UserInfo.getInstance().setUsername(ds_user.child("username").getValue(UserInfo.class).getUsername());                   //set email
                 name_tv = findViewById(R.id.userName);
-                name_tv.setText(uInfo.getName());
-
+                name_tv.setText(UserInfo.getInstance().getName());
+                Log.e("on change", "");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
+                Log.w("ERROR", "ERROR");
             }
         };
 
-        myRef.addValueEventListener(postListener);
+        myRef.addValueEventListener(postListener);*/
 
         TabHost tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
@@ -129,7 +123,6 @@ public class MainActivity extends Activity {
         spec.setContent(R.id.Groups);
         spec.setIndicator("GROUPS");
         tabHost.addTab(spec);
-
 
         FloatingActionButton createGroup = findViewById(R.id.create_group_button);
         createGroup.setOnClickListener(new View.OnClickListener() {
