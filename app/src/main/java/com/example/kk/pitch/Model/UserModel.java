@@ -63,12 +63,21 @@ public class UserModel implements Parcelable {
         userID = user.getUid();
     }
 
-    public void addNameToDB(String name){
+    public void addUserToDB(String name, String username){
         // Write a message to the database
-        Log.e("NAME", "is added to DB");
-        myRef.child("users").push().setValue(userID);
-        myRef.child("users").child(userID).setValue("name");
-        myRef.child("users").child(userID).child("name").setValue(name);
+        myRef.child("user_id").push().setValue(userID);
+        myRef.child("user_id").child(userID).setValue(username);
+
+        myRef.child("users").push().setValue(username);
+        myRef.child("users").child(username).push().setValue("user_id");
+        myRef.child("users").child(username).child("user_id").setValue(userID);
+        addNameToDB(name, username);
+    }
+
+    public void addNameToDB(String name, String username){
+        myRef.child("users").child(username).push().setValue("name");
+        myRef.child("users").child(username).child("name").setValue(name);
+
     }
 
 }
