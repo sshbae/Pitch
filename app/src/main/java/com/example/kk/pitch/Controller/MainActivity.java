@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends Activity {
 
     private Button sign_out;
-    private ImageButton menu;
+    private ImageButton hammen;
     DrawerLayout.DrawerListener menuListener;
     private Intent login_intent;
     private TextView name_tv;
@@ -116,6 +116,15 @@ public class MainActivity extends Activity {
             //}
         //});
 
+
+        hammen = findViewById(R.id.hammen);
+        hammen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(view);
+
+            }
+        });
 
         sign_out = findViewById(R.id.sign_out_button);
         sign_out.setOnClickListener(new View.OnClickListener() {
