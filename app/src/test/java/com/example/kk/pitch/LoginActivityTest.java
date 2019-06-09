@@ -22,13 +22,13 @@ import android.widget.EditText;
 import com.example.kk.pitch.Model.LoginModel;
 import com.example.kk.pitch.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
-
-
-
 import static android.support.constraint.Constraints.TAG;
+import static org.junit.Assert.assertEquals;
+
+
+import org.junit.Test;
 
 public class LoginActivityTest {
-
     private FirebaseAuth mAuth;
     private Intent login_intent;
     private EditText email_et;
@@ -40,11 +40,23 @@ public class LoginActivityTest {
 
     public final static String USERMODEL = "usermodel";
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public static void main(String[] args)
+    {
+        System.out.println("This compiles???");
+    }
+    @Test
+    private void testLogin(String name)
+    {
+        assertEquals(name, "garrett");
+    }
+}
+
+
+
+    /*protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
         mAuth = FirebaseAuth.getInstance();                                                         //Initialize the user
-        model = new LoginModel(this);
-}
+        model = new LoginModel(this);*/
