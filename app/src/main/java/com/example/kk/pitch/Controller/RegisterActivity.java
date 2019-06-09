@@ -3,6 +3,7 @@ package com.example.kk.pitch.Controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,12 +23,12 @@ public class RegisterActivity extends Activity {
     private String email;
     private String password;
     private String confirm;
-    private String name;
-    private Intent login_intent;
+
+    private Intent continue_intent;
     private EditText email_et;
     private EditText password_et;
     private EditText confirm_et;
-    private EditText name_et;
+
     private UserController userController;
     private RegisterModel model;
     private Button registerButton;
@@ -39,7 +40,7 @@ public class RegisterActivity extends Activity {
         mAuth = FirebaseAuth.getInstance();
         userController = new UserController(this);
         model = new RegisterModel(this);
-        login_intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        continue_intent = new Intent(RegisterActivity.this, RegisterInfoActivity.class);
         registerButton = findViewById(R.id.register_button2);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +52,7 @@ public class RegisterActivity extends Activity {
                 password = password_et.getText().toString();
                 confirm_et = findViewById(R.id.confirm);
                 confirm = confirm_et.getText().toString();
-                name_et = findViewById(R.id.name);
-                name = name_et.getText().toString();
+
 
                 register(email, password, confirm, mAuth);
 
@@ -79,8 +79,8 @@ public class RegisterActivity extends Activity {
     }
 
     public void startIntent(){
-        userController.addInfo(email, name);
-        startActivity(login_intent);
+        Log.e("i", " went here");
+        startActivity(continue_intent);
     }
 
     public void regError(){
@@ -99,10 +99,6 @@ public class RegisterActivity extends Activity {
         }
         if(s.equals("confirm")) {
             Toast.makeText(RegisterActivity.this, "Invalid password confirmation.",
-                    Toast.LENGTH_SHORT).show();
-        }
-        if(s.equals("name")) {
-            Toast.makeText(RegisterActivity.this, "Invalid name.",
                     Toast.LENGTH_SHORT).show();
         }
         if(s.equals("match")){

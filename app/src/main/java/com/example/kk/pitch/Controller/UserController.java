@@ -17,27 +17,15 @@ public class UserController {
         this.context = context;
     }
 
-    public void showData(DataSnapshot dataSnapshot, UserInfo uInfo){
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        String userID = user.getUid();
-
-        for(DataSnapshot ds : dataSnapshot.getChildren()) {
-            uInfo.setName(ds.child(userID).getValue(UserInfo.class).getName());                     //set name
-            //uInfo.setEmail(ds.child(userID).getValue(UserInfo.class).getEmail());                   //set email
-        }
-
-    }
-    public void addInfo(String email, String name){
-        Log.e("I", "entered addinfo");
-        if(email == null || email.equals("")){
-            ((RegisterActivity)context).inputError("email");
+    public void addInfo(String username, String name){
+        if(username == null || username.equals("")){
+            ((RegisterInfoActivity)context).inputError("username");
         }else if(name == null || name.equals("")){
-            ((RegisterActivity)context).inputError("name");
+            ((RegisterInfoActivity)context).inputError("name");
         }else{
             UserModel userModel = new UserModel();
-            userModel.addNameToDB(name);
+            userModel.addUserToDB(name, username);
         }
 
     }
