@@ -41,18 +41,8 @@ public class UserModelTest {
     }
 
         @Test
-    public void myRefTest() throws Exception{
-        //myRef = db.getReference();
-        assertTrue(myRef instanceof DatabaseReference);
-    }
-
-
-    public static class TestMain
-    {
-        public static void main(String[] args)
-        {
-            System.out.println("this actually works what a miracle... I spoke way to soon");
-        }
-
+    public void myRefTest() throws Exception {
+            //myRef = db.getReference();
+            assertTrue(myRef instanceof DatabaseReference);
     }
 }
