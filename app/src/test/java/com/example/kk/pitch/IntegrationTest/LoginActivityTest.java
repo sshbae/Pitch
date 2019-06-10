@@ -44,10 +44,14 @@ public class LoginActivityTest {
 
     public static void testLogin(LoginActivity activity)
     {
+        //signIn
         mAuth = FirebaseAuth.getInstance();
         String email = "test@hotmail.com";
         String password = "password";
         activity.signIn(mAuth, email, password);
+
+        //onStart
+        activity.onStart();
     }
 }
 
