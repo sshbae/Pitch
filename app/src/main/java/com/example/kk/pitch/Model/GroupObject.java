@@ -3,6 +3,9 @@ package com.example.kk.pitch.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class GroupObject implements Parcelable{
 
     protected GroupObject(Parcel in) {
@@ -34,9 +37,10 @@ public class GroupObject implements Parcelable{
 
 
     private String name;
-
+    private HashMap<String, String> members;
 
     public GroupObject(String name){
+        this.members = new HashMap<>();
         this.name = name;
     }
 
@@ -47,4 +51,12 @@ public class GroupObject implements Parcelable{
     public void setName(String name) {
         this.name = name;
     }
+
+    public HashMap<String, String> getMembers(){
+        return members;
+    }
+    public void addMembers(String name, String username){
+        members.put(name, username);
+    }
 }
+
