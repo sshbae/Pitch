@@ -20,6 +20,6 @@ public class TestLoginActivity
         String email = "test@hotmail.com";
         String password = "password";
         activity.signIn(mAuth, email, password);
-
     }
+    //@Test
 }

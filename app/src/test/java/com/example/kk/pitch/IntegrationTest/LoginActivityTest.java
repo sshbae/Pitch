@@ -22,14 +22,17 @@ import android.widget.EditText;
 import com.example.kk.pitch.Model.LoginModel;
 import com.example.kk.pitch.Model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.junit.Test;
+import java.lang.RuntimeException;
+import org.junit.AssumptionViolatedException;
+
 import static android.support.constraint.Constraints.TAG;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class LoginActivityTest {
     public static FirebaseAuth mAuth;
-
-
 
     public static void main(String[] args)
     {
@@ -42,6 +45,7 @@ public class LoginActivityTest {
     }
 
 
+    @Test(Exception = Test.None)
     public static void testLogin(LoginActivity activity)
     {
         //signIn
@@ -51,7 +55,17 @@ public class LoginActivityTest {
         activity.signIn(mAuth, email, password);
 
         //onStart
-        activity.onStart();
+        try
+        {
+            activity.onStart();
+            //System.out.println("Testing");
+        }
+        catch(RuntimeException e)
+        {
+            System.out.println("User info could not be updated");
+        }
+
+
     }
 }
 
