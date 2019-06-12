@@ -1,4 +1,4 @@
-package com.example.kk.pitch.Model;
+package com.example.kk.pitch;
 
 
 import android.content.Context;
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GroupPageSettingsActivityTest
+public class GroupSettingsTest
 {
     private static GroupPageSettingsActivity activity = new GroupPageSettingsActivity();
     private static View view = new View();
@@ -38,6 +38,9 @@ public class GroupPageSettingsActivityTest
         MenuItem item = new MenuItem(view);
         assertTrue(activity.onNavigationItemSelected(item));
     }
-
-
+    @Test
+    public void test()
+    {
+        System.out.println("Hello world");
+    }
 }

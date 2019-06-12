@@ -65,5 +65,10 @@ public class LoginActivityTest {
             System.out.println("User info could not be updated");
         }
     }
+    @Test
+    public void test()
+    {
+        System.out.println("Running test");
+    }
 }
 

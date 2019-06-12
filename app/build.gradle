@@ -19,6 +19,11 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+        //exclude 'com.example.kk.pitch.Model.GroupPageSettingsActivityTest'
+        //exclude 'com/example/kk/pitch/IntegrationTest/LoginActivityTest.java'
+        /*unitTests.all{
+                    setIgnoreFailures(true);
+                }*/
     }
 }
 
