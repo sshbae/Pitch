@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.kk.pitch.Model.GroupModel;
 import com.example.kk.pitch.Model.GroupObject;
@@ -23,9 +24,11 @@ public class NewGroupActivity extends Activity {
     private EditText groupNameET;
     private EditText addUserEt;
     private String groupName;
-    private String newUser;
+    private String usernames;
+    private ArrayList<String> newUsers;
     private Button addUser;
     private Button confirmGroup;
+    private TextView usernames_tv;
     private GroupObject groupObject;
     private GroupModel groupModel;
     private UserModel userModel;
@@ -35,17 +38,24 @@ public class NewGroupActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
 
+        usernames = "";
         groupModel = new GroupModel();
         userModel = new UserModel();
         groupNameET = findViewById(R.id.group_name_et);
         addUserEt = findViewById(R.id.add_member_et);
+        usernames_tv = findViewById(R.id.usernames_tv);
         addUser = findViewById(R.id.add_member_button);
         confirmGroup = findViewById(R.id.confirm_group_button);
+        newUsers = new ArrayList<>();
 
         addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newUser = addUserEt.getText().toString();
+                usernames = usernames + "\n" + addUserEt.getText().toString();
+                usernames_tv.setText(usernames);
+                newUsers.add(addUserEt.getText().toString());
+                addUserEt.setText("");
+
             }
         });
 
@@ -64,10 +74,14 @@ public class NewGroupActivity extends Activity {
                 UserInfo.getInstance().setGroups(tempGO);
 
                 groupModel.addGroup(groupName, groupObject.getUniqueId());
-                groupModel.addMembers(newUser, groupObject.getUniqueId());
+                for(String s : newUsers){
+                    groupModel.addMembers(s, groupObject.getUniqueId());
+                    userModel.addGroupToUser(groupObject.getUniqueId(), s);
+
+                }
+
                 groupModel.addMembers(UserInfo.getInstance().getUsername(), groupObject.getUniqueId());
                 userModel.addGroupToUser(groupObject.getUniqueId(), UserInfo.getInstance().getUsername());
-                userModel.addGroupToUser(groupObject.getUniqueId(), newUser);
 
                 Intent confirm_group_intent = new Intent(NewGroupActivity.this, MainActivity.class);
                 startActivity(confirm_group_intent);
