@@ -2,7 +2,9 @@ package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,21 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Attempt to Launch activity outside our app
+        Button voatButton = (Button)findViewById(R.id.FAQButton);
+        voatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String faqwebpage = "https://pastebin.com/embed_js/GgK8Pnfs";
+                Uri webaddress = Uri.parse(faqwebpage);
+
+                Intent gotoVoat = new Intent(Intent.ACTION_VIEW, webaddress);
+                if (gotoVoat.resolveActivity(getPackageManager()) != null) {
+                    startActivity(gotoVoat);
+                }
+            }
+        });
 
 
         mAuth = FirebaseAuth.getInstance();                                                         //Initialize the user
