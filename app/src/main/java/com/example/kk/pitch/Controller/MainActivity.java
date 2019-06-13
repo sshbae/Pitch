@@ -79,15 +79,16 @@ public class MainActivity extends Activity {
 
                 for(int i = 0; i < UserInfo.getInstance().getGroups().size(); i++) {
                     LinearLayout groupLayout = findViewById(R.id.group_linear_layout);
-                    View child = getLayoutInflater().inflate(R.layout.activity_group_display, null);
+                    View child = getLayoutInflater().inflate(R.layout.group_entry, null);
                     TextView gName = child.findViewById(R.id.group_name_display);
                     gName.setText(UserInfo.getInstance().getGroups().get(i).getName());
-
+                    final int temp = i;
                     child.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent payment_intent = new Intent(MainActivity.this, PaymentActivity.class);
-                            startActivity(payment_intent);
+                            Intent group_intent = new Intent(MainActivity.this, GroupActivity.class);
+                            group_intent.putExtra("index", temp);
+                            startActivity(group_intent);
                         }
                     });
 
