@@ -36,4 +36,19 @@
         app:srcCompat="@drawable/pitch_logo"
         app:useCompatPadding="true" />
 
+    <LinearLayout
+        android:id="@+id/group_page_layout"
+        android:layout_width="match_parent"
+        android:layout_height="656dp"
+        android:layout_marginStart="0.0dp"
+        android:layout_marginLeft="0.0dp"
+        android:layout_marginTop="0.0dp"
+        android:layout_marginBottom="0.0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
