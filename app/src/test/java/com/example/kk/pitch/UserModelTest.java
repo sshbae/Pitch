@@ -1,6 +1,7 @@
 package com.example.kk.pitch;
 
 import com.example.kk.pitch.Model.UserModel;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -27,15 +28,9 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-public class UserModelTest {
+//public class UserModelTest {
 
 
-    public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    public static FirebaseDatabase db = FirebaseDatabase.getInstance();
-    public static DatabaseReference myRef = db.getReference();
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private String userID;
-    private FirebaseUser user;
 
 
    // @BeforeClass
@@ -45,12 +40,19 @@ public class UserModelTest {
        // myRef = db.getReference();
    // }
 
-    @Test
+   /* @Test
     public void mAuthTest() throws Exception{
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = db.getReference();
+        FirebaseAuth.AuthStateListener mAuthListener;
+        String userID;
+        FirebaseUser user;
+
         //FirebaseAuth fa = FirebaseAuth.getInstance();
         assertTrue(mAuth instanceof FirebaseAuth);
     }
-
+/*
     @Test
     public void dataBaseTest() throws Exception{
         //FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -63,6 +65,6 @@ public class UserModelTest {
         assertTrue(myRef instanceof DatabaseReference);
     }
 
+*/
 
-
-}
+//}

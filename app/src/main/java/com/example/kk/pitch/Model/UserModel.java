@@ -15,37 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class UserModel implements Parcelable {
-
-
-
-    protected UserModel(Parcel in) {
-        name = in.readString();
-    }
-
-    public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
-        @Override
-        public UserModel createFromParcel(Parcel in) {
-            return new UserModel(in);
-        }
-
-        @Override
-        public UserModel[] newArray(int size) {
-            return new UserModel[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-    }
-
-
+public class UserModel{
 
     private String name;
     private FirebaseDatabase database;
@@ -70,6 +40,7 @@ public class UserModel implements Parcelable {
 
         myRef.child("users").push().setValue(username);
         myRef.child("users").child(username).push().setValue("user_id");
+        myRef.child("users").child(username).push().setValue("groups");
         myRef.child("users").child(username).child("user_id").setValue(userID);
         addNameToDB(name, username);
     }
@@ -77,6 +48,11 @@ public class UserModel implements Parcelable {
     public void addNameToDB(String name, String username){
         myRef.child("users").child(username).push().setValue("name");
         myRef.child("users").child(username).child("name").setValue(name);
+    }
+
+    public void addGroupToUser(String groupID, String username){
+        myRef.child("users").child(username).child("groups").push().setValue(groupID);
+        myRef.child("users").child(username).child("groups").child(groupID).setValue("true");
 
     }
 
