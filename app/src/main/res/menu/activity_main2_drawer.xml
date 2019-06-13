@@ -6,11 +6,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_LayoutFragment"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
+            android:icon="@drawable/ic_menu_send"
+            android:title="Members" />
         <item
             android:id="@+id/nav_LayoutFragment2"
             android:icon="@drawable/ic_menu_send"
+            android:title="Purchases" />
+
+        <item
+            android:id="@+id/nav_LayoutFragment2"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Pitches" />
+
+        <item
+            android:id="@+id/nav_LayoutFragment2"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+
+        <item
+            android:id="@+id/nav_LayoutFragment2"
+            android:icon="@drawable/ic_menu_manage"
             android:title="Sign Out" />
 
     </group>
