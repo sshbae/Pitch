@@ -1,13 +1,26 @@
 package com.example.kk.pitch.Model;
 
+import java.util.ArrayList;
+
 public class UserInfo {
 
     private String name;
     private String username;
+    private ArrayList<GroupObject> groups;
 
-    private UserInfo(){}
+    private UserInfo(){
+        groups = new ArrayList<>();
+    }
 
     public static UserInfo instance;
+
+    public ArrayList<GroupObject> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<GroupObject> groups) {
+        this.groups = groups;
+    }
 
     public static UserInfo getInstance(){
         if(instance == null){

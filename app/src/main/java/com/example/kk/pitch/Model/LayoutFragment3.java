@@ -16,7 +16,7 @@ public class LayoutFragment3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.group_page_settings_layout3, container, false);
+        myView = inflater.inflate(R.layout.idk_group_page_settings_layout3, container, false);
         return myView;
     }
 }

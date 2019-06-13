@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".Controller.MainActivity" />
         <activity android:name=".Controller.NewGroupActivity" />
+        <activity android:name=".Controller.PaymentActivity" />
+        <activity android:name=".Controller.GroupActivity" />
         <activity android:name=".Controller.RegisterActivity" />
         <activity android:name=".Controller.RegisterInfoActivity" />
 
