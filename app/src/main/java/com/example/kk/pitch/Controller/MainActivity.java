@@ -37,41 +37,63 @@ public class MainActivity extends Activity {
     private FirebaseDatabase  database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     private UserController userController = new UserController(this);
-    private ArrayList<GroupObject> groupObjects = new ArrayList<>();
-
-    public final static String GROUPOBJECTS = "groupobjects";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            groupObjects = extras.getParcelableArrayList(GROUPOBJECTS);
-            Log.e("i", "am NOT null");
-            Log.e("name", groupObjects.get(0).getName());
-        }else{
-            groupObjects = new ArrayList<>();
-        }
-        for(int i = 0; i < groupObjects.size(); i++) {
-            LinearLayout groupLayout = findViewById(R.id.group_linear_layout);
-            View child = getLayoutInflater().inflate(R.layout.activity_group_display, null);
-            TextView gName = child.findViewById(R.id.group_name_display);
-            gName.setText(groupObjects.get(i).getName());
-            groupLayout.addView(child);
-        }
+        final ArrayList<GroupObject> tempGroup = new ArrayList<>();
 
         myRef.addListenerForSingleValueEvent( new ValueEventListener() {                            //gets user info from database
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                ArrayList<String> tempString = new ArrayList<>();
+
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
+                DataSnapshot ds_group = snapshot.child("groups");
                 DataSnapshot ds_user = snapshot.child("users");
                 DataSnapshot ds_user_id = snapshot.child("user_id");
                 UserInfo.getInstance().setUsername(ds_user_id.child(userID).getValue().toString());
-                UserInfo.getInstance().setName(ds_user.child(UserInfo.getInstance().getUsername()).getValue(UserInfo.class).getName());                     //set name
+                UserInfo.getInstance().setName(ds_user.child(UserInfo.getInstance().getUsername()).child("name").getValue().toString());                     //set name
+                for(DataSnapshot group : ds_user.child(UserInfo.getInstance().getUsername()).child("groups").getChildren()) {
+                    if(group.getValue().equals("true")) {
+                        String temp = group.getKey();
+                        tempString.add(temp);
+                    }
+                }
+                for(String s : tempString){
+                    GroupObject gO = new GroupObject(ds_group.child(s).child("group_name").getValue().toString());
+                    gO.setUniqueId(s);
+                    for(DataSnapshot s1 : ds_group.child("members").getChildren()){
+                        if(s1.getValue().equals("true")) {
+                            String temp1 = s1.getKey();
+                            gO.addMembers(ds_user.child(temp1).child("name").getValue().toString(), temp1);
+                        }
+                    }
+                    tempGroup.add(gO);
+                }
+
+                UserInfo.getInstance().setGroups(tempGroup);
+
+                for(int i = 0; i < UserInfo.getInstance().getGroups().size(); i++) {
+                    LinearLayout groupLayout = findViewById(R.id.group_linear_layout);
+                    View child = getLayoutInflater().inflate(R.layout.activity_group_display, null);
+                    TextView gName = child.findViewById(R.id.group_name_display);
+                    gName.setText(UserInfo.getInstance().getGroups().get(i).getName());
+
+                    child.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent payment_intent = new Intent(MainActivity.this, PaymentActivity.class);
+                            startActivity(payment_intent);
+                        }
+                    });
+
+                    groupLayout.addView(child);
+                }
+
                 name_tv = findViewById(R.id.userName);
                 name_tv.setText(UserInfo.getInstance().getName());
             }
@@ -109,6 +131,8 @@ public class MainActivity extends Activity {
 
         myRef.addValueEventListener(postListener);*/
 
+
+
         TabHost tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
 
@@ -129,7 +153,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent createGroupIntent = new Intent(MainActivity.this, NewGroupActivity.class);
-                createGroupIntent.putExtra(GROUPOBJECTS, groupObjects);
                 startActivity(createGroupIntent);
             }
         });
