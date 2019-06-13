@@ -45,7 +45,7 @@ public class LoginActivityTest {
     }
 
 
-    @Test(Exception = Test.None)
+    @Test//(Exception = Test.None)
     public static void testLogin(LoginActivity activity)
     {
         //signIn
@@ -64,8 +64,6 @@ public class LoginActivityTest {
         {
             System.out.println("User info could not be updated");
         }
-
-
     }
 }
 
