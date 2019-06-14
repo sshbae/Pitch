@@ -70,5 +70,25 @@ public class LoginActivityTest {
     {
         System.out.println("Running test");
     }
+    
+    
+    @Test
+    public void testsignInError()
+    {
+        LoginActivity activity = new LoginActivity();
+        activity.signInError();
+        assertThat(ShadowToast.getTextOfLatestToast(), equalTo("Authentication failed."));
+    }
+    @Test
+    public void testInputError()
+    {
+        LoginActivity activity = new LoginActivity();
+        activity.inputError("email");
+        System.out.println(ShadowToast.getLatestToast());
+        assertThat(ShadowToast.getTextOfLatestToast(), equalTo("Invalid email."));
+        activity.inputError("password");
+        assertThat(ShadowToast.getTextOfLatestToast(), equalTo("Invalid password"));
+        System.out.println("HELLLLLLLLLLLLLLLLLLLLLLLLLl");
+    }
 }
 
