@@ -93,11 +93,7 @@ public class GroupPageSettingsActivity extends AppCompatActivity
                     .replace(R.id.content_frame
                             , new LayoutFragment2())
                     .commit();
-        } else if (id == R.id.nav_LayoutFragment3) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new LayoutFragment3())
-                    .commit();
+
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

@@ -2,6 +2,7 @@ package com.example.kk.pitch.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kk.pitch.Model.GroupObject;
 import com.example.kk.pitch.Model.UserInfo;
@@ -37,12 +39,56 @@ public class MainActivity extends Activity {
     private FirebaseDatabase  database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     private UserController userController = new UserController(this);
+    public static int randomInt = 0;
+    public static int jokeAnswer = 0;
+    public static ArrayList<String> jokeArray = new ArrayList<String>(10);
+    public static ArrayList<String> answerArray = new ArrayList<String>(10);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
         final ArrayList<GroupObject> tempGroup = new ArrayList<>();
+
+        jokeArray.add("Why don't many people like battleship?");
+        answerArray.add("it's just a hit or miss game");
+
+        jokeArray.add("Why couldn't the kid get in to the Pirate Movie?");
+        answerArray.add("Because it was rated ARRRRRR");
+
+
+
+
+        // Tell a Joke
+        Button JokeButton = (Button)findViewById(R.id.JokeButton);
+        JokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // play a joke question
+                if (jokeAnswer %2 == 0){
+                    String curJoke = jokeArray.get(randomInt);
+
+                    Toast.makeText(MainActivity.this, curJoke,
+                            Toast.LENGTH_SHORT).show();
+                    jokeAnswer++;
+
+                }
+
+                // play a joke answer
+                else {
+                    String curAnswer = answerArray.get(randomInt);
+                    Toast.makeText(MainActivity.this, curAnswer,
+                            Toast.LENGTH_SHORT).show();
+                    jokeAnswer = 0;
+                    randomInt++;
+                }
+
+
+            }
+        });
 
         myRef.addListenerForSingleValueEvent( new ValueEventListener() {                            //gets user info from database
             @Override
